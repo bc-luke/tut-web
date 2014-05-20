@@ -21,20 +21,20 @@ import static junit.framework.TestCase.assertEquals;
 @ContextConfiguration(classes = {PersistenceConfig.class, CoreConfig.class})
 public class CoreDomainIntegrationTest {
 	
-	@Autowired
-	MenuService menuService;
+  @Autowired
+  MenuService menuService;
 
   @Autowired
   OrderService orderService;
 			
-	@Test
-	public void thatAllMenuItemsReturned() {
+  @Test
+  public void thatAllMenuItemsReturned() {
+
+    AllMenuItemsEvent allMenuItems = menuService.requestAllMenuItems(new RequestAllMenuItemsEvent());
+
+    assertEquals(3, allMenuItems.getMenuItemDetails().size());
 		
-	AllMenuItemsEvent allMenuItems = menuService.requestAllMenuItems(new RequestAllMenuItemsEvent());
-	
-	assertEquals(3, allMenuItems.getMenuItemDetails().size());
-			
-	}
+  }
 
   @Test
   public void addANewOrderToTheSystem() {
